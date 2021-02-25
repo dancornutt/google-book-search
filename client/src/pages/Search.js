@@ -1,18 +1,110 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import SaveBtn from "../components/SaveBtn";
+import Jumbotron from "../components/Jumbotron";
+import API from "../utils/API";
+import { Link } from "react-router-dom";
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
+import { Input, TextArea, FormBtn } from "../components/Form";
 
-function Searched() {
+function Search() {
+// Setting our component's initial state
+const [books, setBooks] = useState([])
+const [formObject, setFormObject] = useState({})
+
+// Load all books and store them with setBooks
+// useEffect(() => {
+//   loadBooks()
+// }, [formObject.title])
+
+// searches all books and sets them to books
+function loadBooks(title) {
+  // API.getBooks(title)
+  //   .then(res => {
+  //     console.log("Books searched from google", res);
+  //     setBooks(res.data) 
+  //   }
+
+  //   )
+  //   .catch(err => console.log(err));
+};
+
+// Saves a book from the google list with a given id, then reloads books from the db
+function saveBook(id) {
+    API.saveBook(id)
+      .then(res => loadBooks())
+      .catch(err => console.log(err));
+  }
+
+// Handles updating component state when the user types into the input field
+function handleInputChange(event) {
+  const { name, value } = event.target;
+  setFormObject({...formObject, [name]: value})
+};
+
+// When the form is submitted, use the API.saveBook method to save the book data
+// Then reload books from the database
+function handleFormSubmit(event) {
+  event.preventDefault();
+  if (formObject.title) {
+    API.getBooks(formObject.title)
+      .then(res => {
+        console.log("search:", res.data.items)
+        let search = [];
+        res.data.items.forEach(item => {
+          search.push({
+            title: item.volumeInfo.title,
+            authors: item.volumeInfo.authors,
+            description: item.searchInfo.testSnippet,
+            image: item.volumeInfo.imageLinks.thumbnail,
+            link: item.volumeInfo.infoLink
+          })
+        });
+        setBooks(search)
+      })
+      .catch(err => console.log(err));
+  }
+};
+
   return (
-    <main class="container">
-      <div class="row">
-          <div class="row">
-              <div class="col">
-                  <h1>Search Books Here!</h1>
-                  <hr/>
-              </div>
-          </div>
-      </div>
-  </main>
+    <Container fluid>
+      <Row>
+          <Jumbotron>
+            <h1>Search Google Books!</h1>
+            <h4>Seach for and Save Books of Interest</h4>
+          </Jumbotron>
+          <form>
+            <Input
+              onChange={handleInputChange}
+              name="title"
+              placeholder="Title (required)"
+            />
+            <FormBtn
+              disabled={!formObject.title}
+              onClick={handleFormSubmit}
+            >
+              Search for Books!
+            </FormBtn>
+            {books.length ? (
+            <List>
+                {books.map(book => (
+                <ListItem key={book._id}>
+                    <Link to={"/books/" + book._id}>
+                    <strong>
+                        {book.title} by {book.authors}
+                    </strong>
+                    </Link>
+                    <SaveBtn onClick={() => saveBook(book._id)} />
+                </ListItem>
+                ))}
+            </List>
+            ) : (
+            <h3>No Results to Display</h3>
+            )}
+          </form>
+      </Row>
+    </Container>
   );
 }
 
-export default Searched;
+export default Search;
