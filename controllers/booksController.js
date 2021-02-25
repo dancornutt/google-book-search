@@ -4,12 +4,13 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.Book
-      .find(req.query)
+      .findAll({})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    console.log("About to save a book!", req)
     db.Book
       .create(req.body)
       .then(dbModel => res.json(dbModel))
@@ -17,12 +18,9 @@ module.exports = {
   },
   remove: function(req, res) {
     db.Book
-      .findById({ _id: req.params.id })
+      .findById({ uuid: req.params.uuid })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-//   googleApi : function(req, res) {
-
-//   }
+  }
 };

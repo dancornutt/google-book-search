@@ -30,9 +30,12 @@ function loadBooks(title) {
 };
 
 // Saves a book from the google list with a given id, then reloads books from the db
-function saveBook(id) {
-    API.saveBook(id)
-      .then(res => loadBooks())
+function saveBook(uuid) {
+
+    let newbook = books.find(book => book.uuid === uuid);
+    console.log("saving book", newbook);
+    API.saveBook(newbook)
+      // .then(res => loadBooks())
       .catch(err => console.log(err));
   }
 
@@ -47,12 +50,13 @@ function handleInputChange(event) {
 function handleFormSubmit(event) {
   event.preventDefault();
   if (formObject.title) {
-    API.getBooks(formObject.title)
+    API.searchBooks(formObject.title)
       .then(res => {
         console.log("search:", res.data.items)
         let search = [];
         res.data.items.forEach(item => {
           search.push({
+            uuid: item.id,
             title: item.volumeInfo.title,
             authors: item.volumeInfo.authors,
             description: item.searchInfo.testSnippet,
@@ -88,13 +92,12 @@ function handleFormSubmit(event) {
             {books.length ? (
             <List>
                 {books.map(book => (
-                <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
+                <ListItem key={book.uuid}>
                     <strong>
                         {book.title} by {book.authors}
                     </strong>
-                    </Link>
-                    <SaveBtn onClick={() => saveBook(book._id)} />
+                    <SaveBtn onClick={() => saveBook(book.uuid)} />
+              
                 </ListItem>
                 ))}
             </List>

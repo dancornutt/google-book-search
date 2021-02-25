@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getBooks: function(title) {
+  searchBooks: function(title) {
     console.log("in getBooks, title is:", title)
     return axios.get(`https://www.googleapis.com/books/v1/volumes?q=title:${title}`);
   },
@@ -11,11 +11,11 @@ export default {
   //   return axios.get("/api/books");
   // },
   // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  deleteBook: function(uuid) {
+    return axios.delete("/api/books/:" + uuid);
   },
   // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+  saveBook: function(book) {
+    return axios.post("/api/books", book);
   }
 };

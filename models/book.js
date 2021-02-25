@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
+  uuid: { type: String, required: true },
   title: { type: String, required: true }, //volumeInfo.title
   authors: { type: Array, default: [] }, //volumeInfo.authors
   description: String, //serarchInfo.testSnippet
