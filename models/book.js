@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
   uuid: { type: String, required: true },
-  title: { type: String, required: true }, //volumeInfo.title
-  authors: { type: Array, default: [] }, //volumeInfo.authors
-  description: String, //serarchInfo.testSnippet
-  image: String, //volumeInfo.imageLinks.thumbnail
-  link: String, //volumeInfo.infoLink
+  title: { type: String, required: true },
+  authors: { type: Array, default: [] },
+  description: String,
+  image: String,
+  link: String,
   date: { type: Date, default: Date.now }
 });
 
