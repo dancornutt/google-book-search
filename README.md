@@ -3,13 +3,13 @@
 
 This project is centered on creating a site to help people easily find books available on google and then save their interested books.
 
-![Google Book Search](https://github.com/dancornutt/employee-directory/blob/main/assets/employee-directory.png)
+![Google Book Search](https://github.com/dancornutt/google-book-search/blob/main/assets/appImage.png)
 
 ## Getting Started
 
 Getting started is pretty simple. You will navigate to the deployted url and in the Seach page you can type any book titles that are of interest.
 Once you see something you'd like to save you can click on the "Save" button to save the book for later. The Saved page is a historical view of books that have been saved. You can remove them from the list by clicking on the "x"
-View the site here: [Google Book Search](https://dancornutt.github.io/employee-directory/)
+View the site here: [Google Book Search](https://google-book-search-webapp.herokuapp.com/)
 
 ### Prerequisites
 
