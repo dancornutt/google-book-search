@@ -9,7 +9,7 @@ import { List, ListItem } from "../components/List";
 function Saved() {
     // Setting our component's initial state
     const [books, setBooks] = useState([])
-    const [formObject, setFormObject] = useState({})
+    // const [formObject, setFormObject] = useState({})
 
     // Load all books and store them with setBooks
     useEffect(() => {
@@ -19,37 +19,22 @@ function Saved() {
     // Loads all books and sets them to books
     function loadBooks() {
     API.getBooks()
-        .then(res => 
-        setBooks(res.data)
+        .then(res => {
+          console.log("from load books res: ". res)
+          setBooks(res.data)
+        }
+
         )
         .catch(err => console.log(err));
     };
 
     // Deletes a book from the database with a given id, then reloads books from the db
-    function deleteBook(id) {
-    API.deleteBook(id)
+    function deleteBook(_id) {
+    API.deleteBook(_id)
         .then(res => loadBooks())
         .catch(err => console.log(err));
     }
 
-    // Handles updating component state when the user types into the input field
-    function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
-    };
-
-    // When the form is submitted, use the API.saveBook method to save the book data
-    // Then reload books from the database
-    function handleFormSubmit(event) {
-    event.preventDefault();
-    if (formObject.title) {
-        API.saveBook({
-        title: formObject.title
-        })
-        .then(res => loadBooks())
-        .catch(err => console.log(err));
-    }
-    };
   return (
     <Container fluid>
       <Row>
@@ -60,11 +45,9 @@ function Saved() {
         <List>
             {books.map(book => (
             <ListItem key={book._id}>
-                <Link to={"/books/" + book._id}>
                 <strong>
                     {book.title} by {book.authors}
                 </strong>
-                </Link>
                 <DeleteBtn onClick={() => deleteBook(book._id)} />
             </ListItem>
             ))}
