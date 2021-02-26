@@ -1,29 +1,53 @@
-# google-book-search
 
-## About This Boilerplate
+# Google Book Search
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+This project is centered on creating a site to help people easily find books available on google and then save their interested books.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+![Google Book Search](https://github.com/dancornutt/employee-directory/blob/main/assets/employee-directory.png)
 
-## Starting the app locally
+## Getting Started
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+Getting started is pretty simple. You will navigate to the deployted url and in the Seach page you can type any book titles that are of interest.
+Once you see something you'd like to save you can click on the "Save" button to save the book for later. The Saved page is a historical view of books that have been saved. You can remove them from the list by clicking on the "x"
+View the site here: [Google Book Search](https://dancornutt.github.io/employee-directory/)
 
-```
-npm install
-```
+### Prerequisites
 
-This should install node modules within the server and the client folder.
+You'll need to have a good text editor or IDE for making edits to the code. For this project VS Code was used and was very useful.
+Below are the tools used for this site:
+    * Text Editor
+    * Git
+    * Github account
+    * React
+    * React Bootstrap
+    * MongoDB
+    * ExpressJS
+    * Browser (Chrome was used for development)
 
-After both installations complete, run the following command in your terminal:
+### Installing
 
-```
-npm start
-```
+These are the installation steps to get the site up and running:
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+    * Log into Github
+    * Fork this repo 
+    * Clone your Forked repo on your local machine
+    * 'cd' one level down to employee-directory
+    * Run 'npm i' in install dependencies
+    * Navigate to root location and run 'npm start'
 
-## Deployment (Heroku)
+## Running the tests
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+No tests were constructed, this is an area of opportunity for any one interested in collaborating.
+
+## Deployment
+
+This site is hosted via Heroku, please reachout via LinkedIn for further details on the deploytment.
+
+## Built With
+* [React](https://reactjs.org/) - Front end web framework used
+* [Boostrap React](https://react-bootstrap.github.io/) - Front end component library
+* [MongoDB](https://www.mongodb.com/) - Document Database
+* [ExpressJS](https://expressjs.com/) - Web Server
+* [git](https://git-scm.com/) - Version control
+* [GitHub](https://github.com/) - Used to store the code base
+* [Chrome](https://www.google.com/chrome/) - Used as the browser
